@@ -21,7 +21,7 @@ import javax.servlet.annotation.WebServlet;
 
 @WebServlet(name = "FilePersistence", urlPatterns = {"/file"})
 public class persistenceFile extends HttpServlet{
-  static enum Data {AGE, NAME};
+  static enum Data {AGE, NAME, GAME};
   static String RESOURCE_FILE = "entries.txt";
   static final String VALUE_SEPARATOR = ";";
 
@@ -46,6 +46,7 @@ public class persistenceFile extends HttpServlet{
   {
      String name = request.getParameter(Data.NAME.name());
      String age = request.getParameter(Data.AGE.name());
+     String game = request.getParameter(Data.GAME.name());
 
      String error = "";
      if(name == null){
@@ -73,13 +74,17 @@ public class persistenceFile extends HttpServlet{
             age = "";
           }
      }
+     if(game == null){
+       error= "<li>Favorite Game is required</li>";
+       game = "";
+     }
 
      response.setContentType("text/html");
      PrintWriter out = response.getWriter();
 
      if (error.length() == 0){
        PrintWriter entriesPrintWriter = new PrintWriter(new FileWriter(RESOURCE_FILE, true), true);
-       entriesPrintWriter.println(name+VALUE_SEPARATOR+age);
+       entriesPrintWriter.println(name+VALUE_SEPARATOR+age+VALUE_SEPARATOR+game);
        entriesPrintWriter.close();
 
        PrintHead(out);
@@ -87,7 +92,7 @@ public class persistenceFile extends HttpServlet{
        PrintTail(out);
      }else{
        PrintHead(out);
-       PrintBody(out, name, age, error);
+       PrintBody(out, name, age, game, error);
        PrintTail(out);
      }
   }
@@ -102,7 +107,7 @@ public class persistenceFile extends HttpServlet{
      response.setContentType("text/html");
      PrintWriter out = response.getWriter();
      PrintHead(out);
-     PrintBody(out, "", "", "");
+     PrintBody(out, "", "", "", "");
      PrintTail(out);
   }
 
@@ -127,7 +132,7 @@ public class persistenceFile extends HttpServlet{
   /** *****************************************************
    *  Prints the <BODY> of the HTML page
   ********************************************************* */
-  private void PrintBody (PrintWriter out, String name, String age, String error){
+  private void PrintBody (PrintWriter out, String name, String age, String game, String error){
      out.println("<body onLoad=\"setFocus()\">");
      out.println("<p>");
      out.println("A simple example that demonstrates how to persist data to a file");
@@ -155,6 +160,13 @@ public class persistenceFile extends HttpServlet{
       +"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""
       +age+"\" size=3 required></td>");
      out.println("  </tr>");
+     
+     out.println("  <tr>");
+     out.println("   <td>Favorite Game:</td>");
+     out.println("   <td><input type=\"text\" name=\""+Data.GAME.name()
+      +"\" value=\""+game+"\" size=30 required></td>");
+     out.println("  </tr>");
+
      out.println(" </table>");
      out.println(" <br>");
      out.println(" <br>");
