@@ -8,6 +8,7 @@
     var servletURL = window.location.origin + "/hello";
     var servletURL2 = window.location.origin + "/two";
     var servletURL3 = window.location.origin + "/file";
+    var servletURL4 = window.location.origin + "/attr";
   </script>
 <title>First JSP</title>
 </head>
@@ -18,6 +19,7 @@
 <button onclick="window.location.assign(servletURL);"> Try the servlet </button>
 <button onclick="window.location.assign(servletURL2);"> Two Buttons? </button>
 <button onclick="window.location.assign(servletURL3);"> persistance </button>
+<button onclick="window.location.assign(servletURL4);"> persistance </button>
 
 </body>
 </html>
