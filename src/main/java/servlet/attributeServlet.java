@@ -1,5 +1,5 @@
 // From "Professional Java Server Programming", Patzer et al.,
-
+package servlet;
 // Import Servlet Libraries
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -8,6 +8,23 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.util.Enumeration;
 
+// Import Java Libraries
+import java.util.*;
+import java.io.PrintWriter;
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+//Import Servlet Libraries
+
+@WebServlet(
+        name = "attrServlet",
+        urlPatterns = {"/attr"}
+    )
 public class attributeServlet extends HttpServlet
 {
 public void doGet (HttpServletRequest request, HttpServletResponse response)
