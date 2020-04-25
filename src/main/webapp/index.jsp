@@ -19,7 +19,7 @@
 <button onclick="window.location.assign(servletURL);"> Try the servlet </button>
 <button onclick="window.location.assign(servletURL2);"> Two Buttons? </button>
 <button onclick="window.location.assign(servletURL3);"> persistance </button>
-<button onclick="window.location.assign(servletURL4);"> persistance </button>
+<button onclick="window.location.assign(servletURL4);"> attr </button>
 
 </body>
 </html>
